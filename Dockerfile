@@ -18,7 +18,7 @@ RUN apk update && \
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Clone config files
-RUN git clone https://simonhoellein/dotfiles.git /root/dotfiles && \
+RUN git clone https://github.comn/simonhoellein/dotfiles.git /root/dotfiles && \
     cp -r dotfiles/* /root/.
 
 # Add SSH-Keys from github
