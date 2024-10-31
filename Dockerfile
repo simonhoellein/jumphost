@@ -1,4 +1,5 @@
 ARG CODE_VERSION=latest
+ARG SHELL=zsh
 FROM alpine:${CODE_VERSION} AS os-base
 
 # Install needed software
@@ -19,7 +20,9 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 
 # Clone config files
 RUN git clone https://github.com/simonhoellein/dotfiles.git /root/dotfiles && \
-    cp -r dotfiles/* /root/.
+    cp -r /root/dotfiles/. /root/.
+
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Add SSH-Keys from github
 RUN curl https://github.com/simonhoellein.keys >> ./ssh/authorized_keys
@@ -31,7 +34,7 @@ ADD config/openssh-server/sshd_config /etc/ssh/sshd_config
 EXPOSE 22/tcp
 EXPOSE 22/udp
 
-ENTRYPOINT [ "/bin/sh" ]
+ENTRYPOINT [ "/bin/${SHELL}" ]
 
 # Labels
 LABEL org.opencontainers.image.authors="simon@shoellein.de"
