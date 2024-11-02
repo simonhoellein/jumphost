@@ -1,5 +1,4 @@
 ARG CODE_VERSION=latest
-ARG SHELL=zsh
 FROM alpine:${CODE_VERSION} AS os-base
 
 # Install needed software
@@ -36,7 +35,7 @@ ADD config/openssh-server/sshd_config /etc/ssh/sshd_config
 EXPOSE 22/tcp
 EXPOSE 22/udp
 
-ENTRYPOINT [ "/bin/${SHELL}" ]
+ENTRYPOINT [ "/bin/zsh" ]
 
 # Labels
 LABEL org.opencontainers.image.authors="simon@shoellein.de"
