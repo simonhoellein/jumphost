@@ -25,7 +25,9 @@ RUN git clone https://github.com/simonhoellein/dotfiles.git /root/dotfiles && \
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Add SSH-Keys from github
-RUN curl https://github.com/simonhoellein.keys >> ./ssh/authorized_keys
+RUN mkdir -p /root/.ssh/ && \
+    touch /root/.ssh/authorized_keys && \
+    curl https://github.com/simonhoellein.keys >> ./ssh/authorized_keys
 
 # Add sshd config
 ADD config/openssh-server/sshd_config /etc/ssh/sshd_config
