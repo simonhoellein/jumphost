@@ -1,10 +1,10 @@
-ARG CODE_VERSION=latest
-FROM alpine:${CODE_VERSION} AS os-base
+FROM ubuntu:24.04 AS os-base
 
 # Install needed software
-RUN apk update && \
-    apk add \
-        openssh \
+RUN apt update && \
+    apt install -y \
+        ldb-core \
+        ssh \
         openssh-server \
         screen \
         vim \
@@ -12,7 +12,8 @@ RUN apk update && \
         netcat-openbsd \
         git \
         zsh \
-        curl
+        curl \
+        tmux
 
 # Install ohmyzsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
