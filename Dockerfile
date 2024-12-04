@@ -33,7 +33,7 @@ RUN mkdir -p /root/.ssh/ && \
 # Add sshd config
 ADD config/openssh-server/sshd_config /etc/ssh/sshd_config
 
-COPY start.sh /root/start.sh
+ADD start.sh /root/start.sh
 
 # Expose SSH Port for udp and tcp
 EXPOSE 22/tcp
