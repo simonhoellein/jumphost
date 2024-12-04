@@ -3,7 +3,6 @@ FROM ubuntu:24.04 AS os-base
 # Install needed software
 RUN apt update && \
     apt install -y \
-        ldb-core \
         ssh \
         openssh-server \
         screen \
@@ -12,6 +11,8 @@ RUN apt update && \
         netcat-openbsd \
         git \
         zsh \
+        zsh-autosuggestions \
+        zsh-syntax-highlighting \
         curl \
         tmux
 
@@ -32,11 +33,13 @@ RUN mkdir -p /root/.ssh/ && \
 # Add sshd config
 ADD config/openssh-server/sshd_config /etc/ssh/sshd_config
 
+ADD start.sh /root/start.sh
+
 # Expose SSH Port for udp and tcp
 EXPOSE 22/tcp
 EXPOSE 22/udp
 
-ENTRYPOINT [ "/bin/zsh" ]
+ENTRYPOINT [ "/root/start.sh" ]
 
 # Labels
 LABEL org.opencontainers.image.authors="simon@shoellein.de"
