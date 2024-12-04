@@ -24,7 +24,7 @@ Port 22
 #HostKey /etc/ssh/ssh_host_ed25519_key
 
 # Ciphers and keying
-KexAlgorithms +diffie-hellman-group14-sha
+#KexAlgorithms +diffie-hellman-group14-sha
 #RekeyLimit default none
 #Ciphers 3des-cbc,blowfish-cbc,aes128-cbc,aes128-ctr,aes256-ctr
 
